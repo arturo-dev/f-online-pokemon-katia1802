@@ -1,0 +1,7 @@
+.pokeApp__list  {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(4, 210px);
+    grid-gap: 30px;
+    font-family: 'Open Sans', sans-serif;
+    }

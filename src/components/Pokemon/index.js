@@ -10,7 +10,6 @@ class Pokemon extends Component {
             <p>{name}</p>
             <ul>
               {types.map((type, index) => {
-                  console.log (type)
                 return <li key={index}>{type.type.name}</li>;
               })}
             </ul>

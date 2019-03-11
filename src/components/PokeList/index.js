@@ -5,10 +5,10 @@ import "./PokeList.scss"
 
 class PokeList extends Component {
   render() {
-    const { data } = this.props;
+    const {pokemonResults } = this.props;
     return (
       <ul className="pokeApp__list">
-        {data.map((item, index) => {
+        {pokemonResults.map((item, index) => {
           return (
             <div >
               <li key={index}>

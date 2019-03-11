@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getPokemons } from "./services/pokemonService";
 import PokeList from "./components/PokeList";
+import Search from "./components/Search";
 import "./App.css";
 
 class App extends Component {
@@ -8,8 +9,11 @@ class App extends Component {
     super(props);
 
     this.state = {
-      data: []
+      data: [],
+      search: ""
     };
+    this.getSearch = this.getSearch.bind(this);
+    this.filterThis();
   }
 
   componentDidMount() {
@@ -27,15 +31,45 @@ class App extends Component {
     });
   }
 
+  getSearch(event) {
+    const userSearch = event.currentTarget.value;
+    this.setState({
+      search: userSearch
+    });
+  }
+
+  filterThis() {
+    const filteredSearchResults = this.state.data.filter(item => {
+      const pokemonName = item.name;
+      if (
+        pokemonName
+          .toLocaleLowerCase()
+          .includes(this.state.search.toLocaleLowerCase())
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return filteredSearchResults;
+  }
+
   render() {
-    const data = this.state.data;
+    const pokemonResults = this.filterThis();
 
     return (
       <div>
-        <header>holi</header>
+        <header>
+          <h1>PokeDex</h1>
+          <Search 
+          onKeySearch={this.getSearch} 
+          userSearch={this.state.search} />
+        </header>
 
         <main>
-          <PokeList data={data}/>
+          <PokeList 
+          pokemonResults={pokemonResults}
+          />
         </main>
       </div>
     );
